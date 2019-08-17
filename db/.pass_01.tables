@@ -1,0 +1,40 @@
+#-----------------------------------------------------------------------
+# defines subdetectors and tables included into this pass
+#-----------------------------------------------------------------------
+tof  ampl_channel_000
+tof  ampl_channel_001
+tof  ampl_channel_002
+tof  ampl_channel_003
+tof  ampl_channel_004
+tof  ampl_channel_005
+tof  ampl_channel_006
+tof  ampl_channel_007
+tof  ampl_channel_008
+tof  ampl_channel_009
+tof  ampl_channel_010
+tof  ampl_channel_011
+tof  ampl_channel_012
+tof  ampl_channel_013
+tof  ampl_channel_014
+tof  ampl_channel_015
+tof  ampl_channel_016
+tof  ampl_channel_017
+tof  ampl_channel_018
+tof  ampl_channel_019
+tof  ampl_channel_020
+tof  ampl_channel_021
+tof  ampl_channel_022
+tof  ampl_channel_023
+tof  ampl_channel_024
+tof  ampl_channel_025
+tof  ampl_channel_026
+tof  ampl_channel_027
+tof  ampl_channel_028
+tof  ampl_channel_029
+tof  ampl_channel_030
+tof  ampl_channel_031
+tof  pedestals
+tof  readout_map
+tof  config
+tof  channel_gain
+#-----------------------------------------------------------------------

@@ -1,0 +1,473 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% files to use
+% 
+\documentclass[12pt]{article}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epsf}
+\usepackage{setspace}  % for doublespacing
+%\linespread{2.}
+
+\usepackage{bm}        % for math
+\usepackage{ulem}      % for strike out
+\usepackage{color}     %
+\usepackage{amssymb}   % for math
+%\usepackage{multicol}   % needed for some tables
+% \usepackage{multirow}
+\usepackage{epstopdf}  %added for MAC compiler
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%% \input{psfig}
+% \input{commands} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% local new commands
+
+\newcommand {\chisq}         {\mbox{$\chi^2$}}
+\newcommand {\rsw}           {\mbox{$R_{sw}$}}
+\newcommand {\rwp}           {\mbox{$R_{wp}$}}
+\newcommand {\DeltaPhi}      {\mbox{$\Delta\phi$}}
+\newcommand {\ecal}          {\mbox{$E_{cal}$}}
+\newcommand {\et}            {\mbox{${E_T}$}}
+\newcommand {\etcal}         {\mbox{${E_T}_{cal}$}}
+\newcommand {\etvis}         {\mbox{${E_T}_{vis}$}}
+\newcommand {\evis}          {\mbox{$E_{vis}$}}
+\newcommand {\ewire}         {\mbox{$E_{wire}$}}
+\newcommand {\etauid}        {\mbox{$\epsilon_{ID}^{\tau}$}}
+\newcommand {\estrip}        {\mbox{$E_{strip}$}}
+\newcommand {\etcorr}        {\mbox{$E_T^{corr}$}}
+\newcommand {\gt}            {\mbox{$>$}}
+\newcommand {\gea}           {\mbox{$>=$}}
+\newcommand {\invfb}         {\mbox{$fb^{-1}$}}
+\newcommand {\invpb}         {\mbox{$pb^{-1}$}}
+\newcommand {\LaBrThree}     {\mbox{$\rm LaBr_3$}}
+\newcommand {\lea}           {\mbox{$<=$}}
+\newcommand {\lt}            {\mbox{$<$}}
+\newcommand {\met}           {\mbox{${\not \! E}_{T}$}}
+
+\newcommand {\mmsq}          {\mbox{${\rm mm^2}$}}
+\newcommand {\mmcube}        {\mbox{${\rm mm^3}$}}
+
+\newcommand {\NtrkTen}       {\mbox{$N_{trk}^{10}$}}
+\newcommand {\NtrkTenThirty} {\mbox{$N_{trk}^{10-30}$}}
+\newcommand {\ppbar}         {\mbox{$p\bar{p}$}}
+\newcommand {\ttbar}         {\mbox{$t\bar{t}$}}
+\newcommand {\pt}            {\mbox{$p_{T}$}}
+\newcommand {\ptrack}        {\mbox{$P_{track}$}}
+\newcommand {\vismass}       {\mbox{$M_{track+\pi^0}$}}
+\newcommand {\yrec}          {\mbox{$Y_{rec}$}}
+\newcommand {\zrec}          {\mbox{$Z_{rec}$}}
+
+\newcommand{\Pt}{\ensuremath {p_{\rm{t}}}}
+\newcommand{\Et}{\ensuremath{E_{T}}}
+
+%%% \newcommand {\upar}               {\mbox{$U_{||}$}}
+%%%% $ \sum \vec{p_t} $
+
+\newcommand {\plots} {/home/murat/figures/mcrystal/note}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+
+  \begin{flushright}
+    \bf Fermilab Technical note  \\
+    version 1.01
+    \today
+  \end{flushright}
+  
+  \vspace{1cm}
+  
+  \begin{center} {
+      \Large \bf
+      Coordinate and Depth-Of-Interaction Resolution of Large Scintillating Crystals 
+      with 2-sided SiPM-based Readout: a Monte Carlo Study
+    }
+
+    \vspace{1cm}
+
+    { 
+      P.Murat(Fermilab)
+    }
+
+ \end{center}
+
+  \vspace{1cm}
+
+  \begin{abstract}
+
+    We present results of a Monte Carlo (MC) study of coordinate and depth-of-interaction 
+    resolution of relatively large, several centimeters in size, scintillating crystals 
+    with 2-sided SiPM-based readout. 
+
+    When a single non-pixelated crystal is read out from two opposite sides by SiPM matrices, 
+    the coordinate resolution achieved can be significantly better than the crystal or SiPM size.
+
+    In particular, for a benchmark point with 20x20x10\mmcube\ LYSO crystal read out by 
+    2 matrices of 4x4\mmsq\ SiPMs, one could achieve accuracy in the coordinate 
+    measurement of the order of 0.5mm FWHM. The corresponding accuracy in measuring 
+    the depth of interaction could be better than 1mm. 
+
+    The resolution effectively depends on the crystal geometry, the ratio of the crystal 
+    thickness to its transverse size, H/D, significantly improving at small H/D.
+
+    We discuss implication of these results for design of the high-resolution PET 
+    scanners.
+
+  \end{abstract}
+
+\end{titlepage} 
+
+{\tableofcontents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction
+\newpage
+\section{Introduction}
+
+Most modern high-resolution PET scanner designs are based on pixelated scintillation 
+arrays with each pixel read out by a single photodetector. In this case the coordinate 
+resolution can be approximated by the following formula
+$$
+     \Gamma ~=~ 1.25 \sqrt{ ~ {d \over 2}^2 + (0.0022D)^2 + R^2 + b^2} ,
+$$
+, where d is the pixel size, D - the PET detector radius, R - the positron 
+range, and b - an additional constant accounting for residual misalignment 
+etc, often referred to as Derenzo's resolution formula \cite{derenzo1997}.
+
+It has been shown that in case of non-pixelated, or monolithic, crystals read 
+out by several position-sensitive photodetectors, for example a silicon 
+photomultiplier (SiPM) matrix, it is possible to achieve resolutions 
+significantly better than the crystal or SiPM size \cite{van_dam_2011}. 
+However, the data processing technique described in\cite{van_dam_2011} 
+is almost prohibitevely CPU-intensive.
+
+Compactness of SiPM's allows to implement a double-sided readout with a single 
+scintillating crystal read out by two SiPM matrices from the opposite sides, 
+as shown in Fig.~\ref{fig:pet32-drawings-2-sided-readout}. 
+%
+At a cost of doubling the number of channels, the double-sided readout allows 
+to use simple and fast reconstruction techniques to achieve submillimeter 
+coordinate resolutions, outperforming the pixelated arrays on a cost/resolution 
+basis.
+%
+In addition, double-sided readout allows the depth of interaction measurements. 
+
+Coupling multiple SiPM's to one crystal reduces the amount of light detected 
+by each SiPM and thus affects the accuracy of the timing measurements. 
+It has been shown, however, that using digital SiPMs allows to achieve 
+timing resolution CRT \lt\ 200ps FWHM with 20mm thick LSO crystals \cite{schaart_2012}. 
+
+In this note, we perform a Monte Carlo study of the coordinate resolution of 
+relatively large, several centimeters in size, crystals, and describe a simple 
+and fast reconstruction techniques including reconstruction of the depth 
+of interaction (DOI).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{MC Simulation}
+
+The simulated detector setup consists of a box-shaped scintillating crystal 
+read out from the two opposite sides by the SiPM matrices. 
+The crystal cross section is varied in between 20x20\mmsq\ and 40x40\mmsq. 
+The crystal thickness is varied from 10m to 30mm to cover the range of approximately 
+one to three radiation lengths for the heavy neorganic scintillators of interest. 
+
+We assume that a 511 KeV photon from the $e^+e^-$ annihilation hits the 
+scintillating crystal and that, although this is a simplification, the 
+photon interaction point is distributed uniformly within the crystal 
+volume. We also consider only the photoabsorption of the annihilation 
+photons and ignore their Compton scattering inside the crystal and the size 
+of the EM shower developed in the crystal, assuming all optical photons to be  
+produced in the same space point.
+
+As the spatial resolution depends on the light yield, we consider two different 
+scintillators,  lutetium yttrium orthosilicate (LYSO)) and \LaBrThree , with 
+the light yields of 26000 and 60000 optical photons per MeV correspondingly.
+
+The coordinate system is chosen such that the SiPM matrices are located on the 
+two Z-sides of the crystal, as shown in Fig.~\ref{fig:pet32-drawings-2-sided-readout}.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.6\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/pet32-drawings-2-sided-readout}
+       \caption[]{A typical event, 20x20mm$^2$ crystal, 4x4mm$^2$ SiPM matrix}
+       \label{fig:pet32-drawings-2-sided-readout}
+  \end{center}
+\end{figure}
+
+The reflection efficiency from the crystal walls is taken to be 95\%, 
+independent on the photon wavelength. 
+%
+The SiPM photon detection efficiency used by the simulation is 25\%, 
+also independent on the optical photon wavelength, and the angular 
+dependence of the SiPM photon detection efficiency is taken 
+from \cite{sipm_angular_efficiency}.
+
+The simulated SiPM matrices consist of 2x2\mmsq\ or 4x4\mmsq\ SiPMs. 
+Spacing between the SiPMs is assumed to be zero, and theSiPM  matrix 
+fully covers the corresponding crystal side.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Reconstruction}
+
+When a primary 511 KeV photon interacts inside the scintillator, its energy 
+gets re-emitted in a form of multiple optical photons detected by the SiPM's.
+The SiPM pulse height distribution is sensitive to the location of the 
+interaction point. 
+
+Figure ~\ref{fig_6} shows an ``event display'' of a typical 
+event for 20x20x20\mmcube\ LYSO crystal read our by 5x5 matrices of 4x4\mmsq\ 
+SiPMs. Numbers of entries per cell/bin on the projections correspond to the 
+number of detected optical photons. For the displayed event the Z coordinate 
+of the interaction point is close to the Z = -1cm side, and it is clear 
+from Figure ~\ref{fig_6} that the center of gravity of the pulse height 
+distribution on that side gives a good estimate of the X and Y coordinates 
+of the interaction point. It is also clear that the charge distribution on 
+the opposite side is much less sensitive ot the coordinates of the interaction 
+point. 
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_6}
+       \caption[]{A typical event, 20x20mm2 crystal, 2x2mm2 SiPM}
+       \label{fig_6}
+  \end{center}
+\end{figure}
+
+We use the 1D projections of the distributions in Fig.~\ref{fig_6} to reconstruct 
+the mean values of the charge distributions:
+
+$$
+  <X> = {\Sigma { X_i \cdot Q_i} / \Sigma{Q_i}}, ~~~~~~~ <Y> = {\Sigma { Y_i \cdot Q_i} / \Sigma{Q_i}}, 
+$$
+
+and their respective widths (the second momenta of the charge distributions) 
+
+$$
+  {\sigma_x}^2 ~=~ <X^2>-<X>^2 , ~~~~~~~~~ {\sigma_y}^2 ~=~ <Y^2>-<Y>^2
+$$
+
+Fig.~\ref{fig_8} shows correlation between the width of the charge distribution 
+$\sigma_R = \sqrt{\sigma_x^2 + \sigma_y^2}$ reconstructed the Z=ZMAX side and the 
+Z coordinate of the interaction point. 
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.6\textwidth, clip=true, viewport=1.in .0in 8.0in 8.0in] 
+       {\plots/fig_8}
+       \caption[]{
+         Width of the charge distribution averaged over $X_V$ and $Y_V$, 
+         and plotted vs the $Z_V$. 20x20x20 mm3 LYSO crystal, 4x4mm SiPM.
+       }
+       \label{fig_8}
+  \end{center}
+\end{figure}
+
+The larger values of Z correspond to smaller cluster widths reconstructed on Z=ZMAX side 
+and larger cluster widths reconstructed on the Z=ZMIN side. For events with ZMAX-Z < 2mm 
+very often all the light gets collected by only one SiPM, so the calculated width of the 
+charge distribution is zero.
+
+To reconstruct X and Y coordinates we on the 2 z sides are weighted with the weights defined 
+by the corresponding charge distribution widths:
+
+$$
+x = x_1 \cdot w_1 + x_2 \cdot w_2 ~~ ;~~ w_i = {{1 \over \sigma_i^2} \cdot {{\sigma_1^2 \sigma_2^2} \over {\sigma_1^2 + \sigma_2^2}}}
+$$
+
+where $X_i$ is a coordinate reconstructed on the corresponding Z side.
+
+The Z coordinate is reconstructed in a similar way. Assuming $\Delta Z$ is the crystal 
+half-thickness, the weighting gives: 
+
+$$
+   z = \Delta Z \cdot (\sigma_1^2-\sigma_2^2) / (\sigma_1^2 + \sigma_2^2)
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newpage
+\section {Resolution in Depth Of Interaction}
+
+Weight-based technique of reconstructing the Z-coordinate introduces a systematic 
+offset between the reconstructed coordinate and the true one, called differential 
+non-linearity.
+
+The differential non-linearity, shown in Fig.~\ref{fig_9}, left, can be accounted 
+for by either the experimental or MC-based calibration. The corrected distribution 
+shown in Fig.~\ref{fig_9} (right) has non-gaussian tails, however the resolution 
+in the reconstructed depth of interaction, DOI, is about 1.8 mm FWHM. 
+Although this number is just a MC estimate, it is much better than the currently 
+achieved resolution in DOI, which is typically of the order of the thickness of 
+the crystal used.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 4.5in] 
+       {\plots/fig_9}
+       \caption[]{
+         a) Difference between the reconstructed and true Z coordinates plotted vs 
+         the true Z coordinate. 20x20x20 LYSO crystal, 4x4mm SiPM. Non-linearity 
+         effect is seen.
+         b) distribution in Z-residuals, corrected for non-linearity. The distribution 
+         has non-gaussian tails, the resolution in the reconstructed depth of interaction 
+         is about 1.8mm FWHM.
+       }
+       \label{fig_9}
+  \end{center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section {Resolution in X and Y}
+
+The simulated crystal has a square cross section, and the resolutions in X and Y 
+coordinates are supposed to be the same. We, therefore, discuss only resolution in X 
+Figure \ref{fig_21} shows distributions in X residuals, $\Delta X = X_{reco}-X_{true}$, 
+plotted vs the reconstructed X coordinate for 20x20x20 \mmcube\ crystal and 4x4 \mmsq\ 
+SiPM-based readout. 
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 6.in] 
+       {\plots/fig_21}
+       \caption[]{
+         Residuals $\Delta X$ vs $X_{rec}$ , averaged over the crystal 
+         volume for 20x20x20 LYSO crystal and 4x4mm SiPM's.
+       }
+       \label{fig_21}
+  \end{center}
+\end{figure}
+
+The distribution has several characteristic features. 
+
+\begin{itemize}
+\item
+  given the described algorithm, one can't reconstruct the value of X-coordinate greater 
+  than 0.8 cm
+\item 
+  for $X > 0.6$ the profile distribution peaks in the edge bin, 
+  so in this region the reconstructed coordinate doesn't depend 
+  on the true one.
+\item 
+  the best resolution is achieved around $|X| = 0.4$, the region where 
+  the cluster is centers in the bin, minimizing the calculated $\sigma$.
+\item 
+  the line around 0 corresponds to events with large |Z|, for which 
+  one of the reconstructed values of $\sigma$ is equal to zero.
+\end{itemize}
+
+Fig.~\ref{fig_71} which demonstrates $\Delta Y$ dependence on $Y_{rec}$. shows that while 
+the reconstructed $Y_{rec}$, on average, doesn't depend on Z, 
+however and the reconstructed $Z_{rec}$ doesn't n average depend 
+on Y, we observe typical dependencies of $Y_{rec}$ on $Y_{true}$ and $Z_{rec}$ on $Z_{true}$ 
+and introduce average corrections.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_71}
+       \caption[]{Resolution for X=0 Y=0, error bars represent widths of the 
+       corresponding residual distributions}
+       \label{fig_71}
+  \end{center}
+\end{figure}
+
+
+Averaging the corrected residuals over the crystal volume results in the X- and Y- resolutions of 
+about 1.8mm FWHM, as shown in Figure \ref{fig_5}, left. This result is consistent with the results 
+of 
+
+Also shown in Figure \ref{fig_5} is the resolution in the Z coordinate, the depth of 
+interaction. Even with some remaining systematic effects not taken into account, the resolution 
+in the depth of interaction, DOI, is about 3mm FWHM, about 7 times better than the crystal 
+size of 20mm
+
+\begin{figure}[!ht]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_5}
+       \caption[]{Corrected residuals vs the reconstructed coordinates - the systematics are still seen}
+       \label{fig_5}
+  \end{center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+Resolutions are presented in Figure \ref{fig_11}.
+
+\begin{figure}[ht!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_11}
+       \caption[]{Resolutions}
+       \label{fig_11}
+  \end{center}
+\end{figure}
+
+
+Resolution in Y2 for different geometries
+
+
+\begin{figure}[ht!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_12}
+       \caption[]{Resolutions}
+       \label{fig_12}
+  \end{center}
+\end{figure}
+
+
+Resolution in Z (depth of interaction) for different geometries
+
+\begin{figure}[ht!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_13}
+       \caption[]{Resolutions}
+       \label{fig_13}
+  \end{center}
+\end{figure}
+
+
+Resolution in Y4 for different geometries
+
+\begin{figure}[ht!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/fig_14}
+       \caption[]{Resolutions}
+       \label{fig_14}
+  \end{center}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section {Conclusions}
+
+
+
+%----------------------------------
+\include{bibliography}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% end of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

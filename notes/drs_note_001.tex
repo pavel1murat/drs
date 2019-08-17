@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% files to use
+% 
+\documentclass[12pt]{article}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epsf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%% \input{psfig}
+% \input{commands} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% local new commands
+
+\newcommand {\chisq}         {\mbox{$\chi^2$}}
+\newcommand {\rsw}           {\mbox{$R_{sw}$}}
+\newcommand {\rwp}           {\mbox{$R_{wp}$}}
+\newcommand {\DeltaPhi}      {\mbox{$\Delta\phi$}}
+\newcommand {\ecal}          {\mbox{$E_{cal}$}}
+\newcommand {\et}            {\mbox{${E_T}$}}
+\newcommand {\etcal}         {\mbox{${E_T}_{cal}$}}
+\newcommand {\etvis}         {\mbox{${E_T}_{vis}$}}
+\newcommand {\evis}          {\mbox{$E_{vis}$}}
+\newcommand {\ewire}         {\mbox{$E_{wire}$}}
+\newcommand {\etauid}        {\mbox{$\epsilon_{ID}^{\tau}$}}
+\newcommand {\estrip}        {\mbox{$E_{strip}$}}
+\newcommand {\etcorr}        {\mbox{$E_T^{corr}$}}
+\newcommand {\gt}            {\mbox{$>$}}
+\newcommand {\gea}           {\mbox{$>=$}}
+\newcommand {\invfb}         {\mbox{$fb^{-1}$}}
+\newcommand {\invpb}         {\mbox{$pb^{-1}$}}
+\newcommand {\lea}           {\mbox{$<=$}}
+\newcommand {\lt}            {\mbox{$<$}}
+\newcommand {\met}           {\mbox{${\not \! E}_{T}$}}
+\newcommand {\NtrkTen}       {\mbox{$N_{trk}^{10}$}}
+\newcommand {\NtrkTenThirty} {\mbox{$N_{trk}^{10-30}$}}
+\newcommand {\ppbar}         {\mbox{$p\bar{p}$}}
+\newcommand {\ttbar}         {\mbox{$t\bar{t}$}}
+\newcommand {\pt}            {\mbox{$p_{T}$}}
+\newcommand {\ptrack}        {\mbox{$P_{track}$}}
+\newcommand {\vismass}       {\mbox{$M_{track+\pi^0}$}}
+\newcommand {\wenu}          {\mbox{$W^{\pm} \rightarrow e^{\pm} \nu$}}
+\newcommand {\wmunu}         {\mbox{$W^{\pm} \rightarrow \mu^{\pm} \nu$}}
+\newcommand {\wtaunu}        {\mbox{$W^{\pm} \rightarrow \tau^{\pm} \nu$}}
+\newcommand {\wpigamma}      {\mbox{$W^{\pm} \rightarrow \pi^{\pm} \gamma$}}
+\newcommand {\zpigamma}      {\mbox{$Z^{0} \rightarrow \pi^{0} \gamma$}}
+\newcommand {\zee}           {\mbox{$Z^0 \rightarrow e^+ e^-$}}
+\newcommand {\zjj}           {\mbox{$Z^0 \to j j$}}
+\newcommand {\znn}           {\mbox{$Z^0 \to \nu \nu$}}
+\newcommand {\zmumu}         {\mbox{$Z^0 \rightarrow \mu^+ \mu^-$}}
+\newcommand {\ztautau}       {\mbox{$Z^0 \rightarrow \tau^+ \tau^-$}}
+\newcommand {\zzllll}        {\mbox{$ZZ \to \l^+ \l^- \l^+ \l^-$}}
+\newcommand {\zzllnn}        {\mbox{$ZZ \to \l^+ \l^- \nu \nu$}}
+\newcommand {\zzlljj}        {\mbox{$ZZ \to \l^+ \l^- j j$}}
+%\newcommand {\luminosity}    {\mbox{$\sim 4.3 fb^{-1}$}}
+\newcommand {\luminosity}    {\mbox{$\sim 5 fb^{-1}$}}
+\newcommand{\Pt}{\ensuremath {p_{\rm{t}}}}
+\newcommand{\Et}{\ensuremath{E_{T}}}
+
+\newcommand {\plots} {/home/murat/drs4/figures}
+
+%%% \newcommand {\upar}               {\mbox{$U_{||}$}}
+%%%% $ \sum \vec{p_t} $
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+
+  \begin{flushright}
+    \bf CDF/DOC/ELECTROWEAK/CDFR/10008 \\
+    version 1.00
+    \today
+  \end{flushright}
+  
+  \vspace{1cm}
+  
+  \begin{center} {
+      \Large \bf
+      Study of the ZZ Production
+    }
+
+    \vspace{1cm}
+
+    { 
+      V.Giakoumopoulou, N.Giokaris (Univ. of Athens), P.Murat(Fermilab), 
+      A.Robson (Univ. of Glasgow) 
+    }
+
+ \end{center}
+
+  \vspace{1cm}
+
+  \begin{abstract}
+    Using 4.8\invfb\ of data collected by the CDF experiment in \ppbar\ collisions 
+    at 1.96 TeV we study production of events with two Z bosons. 
+
+    We analyse Z($l^+l^-$)Z($l^+l^-$), Z($l^+l^-$)Z($\nu\nu$) and Z($l^+l^-$)Z(jj) 
+    final states in search for narrow resonances.
+
+    Analysis of the Z($l^+l^-$)Z($l^+l^-$) channel uses data reconstructed with GEN7.
+    Z($l^+l^-$)Z($\nu\nu$) and Z($l^+l^-$)Z(jj) channels are analysed using GEN6 data.
+
+    Production cross section of the ZZ pairs measured in the region $M_{ZZ}<300$ GeV 
+    is consistent with the SM expectations.
+  \end{abstract}
+
+\end{titlepage} 
+
+{\tableofcontents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction
+%\include{todo}
+%\include{plan}
+%\include{introduction}
+%\include{gen7}
+%\include{data_samples}
+%\include{mc_simulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IDENTIFICATION
+%\include{identification}
+%\newpage
+%\include{z_reconstruction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WZ cross section
+%\newpage
+%\include{calibration_measurements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Z mass constraint
+%\include{zmass_constraint}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% analysis and results
+%\include{analysis}
+% \include{event_yields}
+%\newpage
+%\include{4l_channel}
+%\newpage
+% \include{2l_met_channel}
+% \newpage
+% include{2l_2j_channel}
+% \newpage
+% \include{combination}
+% \include{results}
+% \include{conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Conclusions
+%\include{conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices
+\appendix
+\include{appa}
+\include{appb}
+\include{appc}
+ 
+%%% \include{appendix_1}
+
+\include{bibliography}
+
+
+  \begin{figure}[hbt]
+    \vspace{0.0in}
+    \includegraphics[width=0.9\textwidth, clip=true, viewport=.1in .0in 7.7in 3.3in]
+    {\plots/2012-04-30-eres-run14-vs-run24.pdf}
+    \caption[]{
+      (a) Corrected isolation energy across the calorimeter
+      wedge coordinate $X$ in \zee\ (new correction: solid circles; standard
+      correction: open squares) and \zmumu\ (new correction: open
+      stars) events; 
+      (b) average calorimeter isolation energy as a function of 
+      electron \et\ in \zee\ events.}
+    \label{fig:ces_dist}
+  \end{figure}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% end of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,573 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% files to use
+% 
+
+%\documentclass[aps,prd,showpacs,superscriptaddress,twocolumn]{revtex4}  % for submission
+\RequirePackage{lineno}
+\documentclass[aps,prd,showpacs,preprint,groupedaddress]{revtex4}  % for review
+%\documentclass[12pt]{article} %{revtex4}  % for review
+%
+%%%%%%%%%% \documentclass[aps,preprint,showpacs,superscriptaddress]{revtex4}  % for submission
+\usepackage{graphicx}  % needed for figures
+\usepackage{epsf}  % needed for figures
+\usepackage{dcolumn}   % needed for some tables
+
+\usepackage{setspace}  % for doublespacing
+%\linespread{2.}
+
+\usepackage{bm}        % for math
+\usepackage{ulem}      % for strike out
+\usepackage{color}     %
+\usepackage{amssymb}   % for math
+%\usepackage{multicol}   % needed for some tables
+\usepackage{multirow}
+\usepackage{epstopdf}  %added for MAC compiler
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%% \input{psfig}
+% \input{commands} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% local new commands
+
+\newcommand {\chisq}         {\mbox{$\chi^2$}}
+\newcommand {\rsw}           {\mbox{$R_{sw}$}}
+\newcommand {\rwp}           {\mbox{$R_{wp}$}}
+\newcommand {\DeltaPhi}      {\mbox{$\Delta\phi$}}
+\newcommand {\ecal}          {\mbox{$E_{cal}$}}
+\newcommand {\et}            {\mbox{${E_T}$}}
+\newcommand {\etcal}         {\mbox{${E_T}_{cal}$}}
+\newcommand {\etvis}         {\mbox{${E_T}_{vis}$}}
+\newcommand {\evis}          {\mbox{$E_{vis}$}}
+\newcommand {\ewire}         {\mbox{$E_{wire}$}}
+\newcommand {\etauid}        {\mbox{$\epsilon_{ID}^{\tau}$}}
+\newcommand {\estrip}        {\mbox{$E_{strip}$}}
+\newcommand {\etcorr}        {\mbox{$E_T^{corr}$}}
+\newcommand {\gt}            {\mbox{$>$}}
+\newcommand {\gea}           {\mbox{$>=$}}
+\newcommand {\invfb}         {\mbox{$fb^{-1}$}}
+\newcommand {\invpb}         {\mbox{$pb^{-1}$}}
+\newcommand {\LaBrThree}     {\mbox{$\rm LaBr_3$}}
+\newcommand {\lea}           {\mbox{$<=$}}
+\newcommand {\lt}            {\mbox{$<$}}
+\newcommand {\met}           {\mbox{${\not \! E}_{T}$}}
+
+\newcommand {\mmsq}          {\mbox{${\rm mm^2}$}}
+\newcommand {\mmcube}        {\mbox{${\rm mm^3}$}}
+
+\newcommand {\NtrkTen}       {\mbox{$N_{trk}^{10}$}}
+\newcommand {\NtrkTenThirty} {\mbox{$N_{trk}^{10-30}$}}
+\newcommand {\ppbar}         {\mbox{$p\bar{p}$}}
+\newcommand {\ttbar}         {\mbox{$t\bar{t}$}}
+\newcommand {\pt}            {\mbox{$p_{T}$}}
+\newcommand {\ptrack}        {\mbox{$P_{track}$}}
+\newcommand {\vismass}       {\mbox{$M_{track+\pi^0}$}}
+\newcommand {\tzeroa}        {\mbox{$T_0^a$}}
+\newcommand {\yrec}          {\mbox{$Y_{rec}$}}
+\newcommand {\zrec}          {\mbox{$Z_{rec}$}}
+
+\newcommand{\Pt}{\ensuremath {p_{\rm{t}}}}
+\newcommand{\Et}{\ensuremath{E_{T}}}
+
+%%% \newcommand {\upar}               {\mbox{$U_{||}$}}
+%%%% $ \sum \vec{p_t} $
+
+\newcommand {\plots} {/home/murat/figures/drs4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+
+  \begin{flushright}
+    \bf Fermilab Technical note  \\
+    draft version 1.02
+    \today
+  \end{flushright}
+  
+  \vspace{1cm}
+  
+  \begin{center} {
+      \Large \bf
+      Study of the timing resolution of the LYSO crystals with the SiPM-based readout
+    }
+
+    \vspace{1cm}
+
+    { 
+      P.Murat(Fermilab)
+    }
+
+ \end{center}
+
+  \vspace{1cm}
+
+  \begin{abstract}
+    Results of the study, look at the method
+
+  \end{abstract}
+
+\end{titlepage} 
+
+{\tableofcontents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction
+\section{Introduction}
+
+In this note we document reconstruction and analysis procedures used to analyse
+data from the PET-TOF test stand.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Setup}
+
+The experimental setup consists of a box-shaped scintillating crystal 
+read out from the two opposite sides by the SiPM matrices. 
+
+The coordinate system is chosen such that the SiPM matrices are located on the 
+two Z-sides of the crystal, as shown in Fig.~\ref{fig:crystals}.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/missing_plot}
+       \caption[]{Experimental setup: crystals and SiPMs}
+       \label{fig:crystals}
+  \end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Energy resolution}
+
+The waveform processing starts from finding the pedestal, or the offset voltage, 
+and subtracting it from the waveform. The pedestal subtraction procedure is described 
+in Section \ref{sec:appendix_1}
+
+The pulse charge, a measure of the incoming photon energy, is calculated by 
+integrating the pulse over 40ns (200 channels) and normalizing the photopeak 
+in the distribution in Fig.~\ref{fig:run_072_waveform_ph_q1} to the expected 
+energy of the non-scattered annihilation photon, 511 KeV. The energy resolution 
+in the peak is $\Delta E / E ~\simeq~ 9\%$ and $\simeq~ 9.4\%$ FWHM for channels 0 
+and 1 correspondingly. This resolution corresponds to about 650 photons registered 
+by the SiPM, or, overall photodetection efficiency which includes effects of 
+light reflection, collection and SiPM quantum efficiency of about 5\%.
+
+Alternatively, the photon energy can also be measured using the pulse height 
+in which case the corresponding resolutions are $\sim 22\%$ and $\sim 23\%$ 
+for channels 0 and 1, or worse by about a factor of 2.
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace{-3.0cm}
+    \includegraphics [width=1.\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/run_072_waveform_ph_q1}
+       \caption[]{
+         Top: the signal waveforms, the typical pulse length of about 40 ns; 
+         Middle: distribution in the pulse height ad integrated charge, normalized to 511KeV 
+         for channel \#0; 
+         Bottom: distributions in the pulse height and the normalized integrated charge 
+         for channel \#1
+       }
+       \label{fig:run_072_waveform_ph_q1}
+  \end{center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Fitting }
+
+There is no analythical function which could be used as a model of a pulse 
+leading egde based on the apriori considerations, so in most cases the 
+parameterization choice is driven by the data. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gaussian Fit}
+\label{sec:gaussian_fit}
+
+The idea of parameterizing the leading edge of a pulse with a gaussian comes from 
+the Fig. \ref{fig:run_72_ev_105_gaus_shape_display} which shows that the 
+significant part of the waveform leading edge can be well described by the gaussian.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 6.in] 
+       {\plots/srcs01_000072/run_72_ev_105_gaus_shape_display}
+       \caption[]{
+         Gaussian fits in the range of 0.05-0.5 of the pulse height \\
+         {\bf 1. describe the error bars}
+       }
+       \label{fig:run_72_ev_105_gaus_shape_display}
+  \end{center}
+\end{figure}
+
+
+The most common hardware-based time measurement technique, based on the use 
+of Constant Fraction Discriminators (CFD), determines the pulse time stamp $T_0$ 
+as the time, when the pulse, developing in time, reaches certain fraction of 
+its maximal height, typically 10\%. This technique is based on the assumption that 
+the pulse leading edge has constant shape, such that $\Delta T ~=~ T_0^{CDF}-T_0$  
+is a constant. However, statistical fluctuations at the early part of pulse development 
+could affect the timing resolution. 
+
+Gaussian parameterization of the waveform, $V(t) ~=~ A e^{-(t-t_0)^2/\sigma_t^2}$, 
+doesn't have a parameter, which is directly related with $T_0^{pulse}$ or could 
+be translated into it. For that reason, the pulse timestamp $T_0$ is calculated 
+using the following ansatz:
+$$
+      T_0 ~=~ T(\alpha V_{max})  -  {{ \alpha V_{max}} \over { dV/dT(\alpha V_{max})}}
+$$
+
+as shown in Fig.\ref{fig:gaussian_pulse_t0}. A data-driven optimization of the timing 
+resolution resulted in $\alpha = 0.07$ 
+
+{\bf 1. do we need to show the optimization curve ? }
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/missing_plot}
+       \caption[]{T0 determination for gaussian parameterization}
+       \label{fig:gaussian_pulse_t0}
+  \end{center}
+\end{figure}
+
+For the fit, an uncertainty in the measured voltage could be considered as coming 
+from the two sources: random noise and the shower development statistics. 
+
+$$
+     \sigma_i ~=~ 1.5 \sigma_{noise} + + 0.05 V_i;
+$$
+
+{\bf Obviously, the statistical term should be proportional to $\sqrt{V_i}$ - check that ...}
+
+The distributions in the fit chi2 are presented in Fig. \ref{fig:srcs01_000072_fig_1}
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth] % , clip=true, viewport=0.in .0in 8.in 5.in] 
+       {\plots/srcs01_000072/note/fig_1}
+       \caption[]{
+         Gaussian fits: distributions in $\chi^2/N_{DOF}$ and the number of fit points 
+       }
+       \label{fig:srcs01_000072_fig_1}
+  \end{center}
+\end{figure}
+
+To see what are advantages of the pulse fitting, in Fig. \ref{fig:resolution_vs_chi2_gaus} 
+we compare the resolution in $T_0^{gaus}$ to the resolution in $T_0^{CFD}$, where CFD stands 
+for a Constrant Fraction Discriminator.
+
+Plotted in Fig. \ref{fig:srcs01_000072_fig_2} is the distribution in the gaussian sigma, returned 
+by the fit. The mean of the distribution is about 0.8 ns, which translates into 
+the pulse rise time, from 10\% to 90\%, of about 1.6 ns.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_2}
+       \caption[]{Gaussian Sigma - a fit parameter, the distribution mean is of the order of 800 ps }
+       \label{fig:srcs01_000072_fig_2}
+  \end{center}
+\end{figure}
+
+Fig.\ref{fig:srcs01_000072_fig_4} shows distribution in ``reduced T0'', fractional part 
+of T0. A bias with respect to the first fit point may reveal itself as a non-uniformity in 
+this distribution. We do not observe statistically significant nonuniformities.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport= 0.in .0in 8.in 7.in] 
+       {\plots/srcs01_000072/note/fig_4}
+       \caption[]{
+         Distribution in fractional part of fitted T0. As times corresponding 
+         to fit points are forced to the corresponding bin centers, a bias caused 
+         by this choice may result in non-uniform distribution in the found T0 
+         with respect to the bin center. The distributions are consistent with 
+         being uniform.
+       }
+       \label{fig:srcs01_000072_fig_4}
+  \end{center}
+\end{figure}
+
+{\bf TGausFitAlg} performs fit with equal weights (``w0q'' options of TH1::Fit).
+The \chisq\ per degree of freedom, obviously, comes out very small. 
+I'm trying to renormalize it by doing something very questionable:
+$$
+         \chisq ~=~ \chisq \cdot V_{max}^2
+$$
+
+the resulting selection in {\bf drsana} histogrammming is based on this 
+definition of the \chisq. Effectively, the \chisq\ cut selects smaller pulses.
+
+I'm not using this \chisq\ definition in any other place. For the same charge,
+smaller pulse height means wider pulse.
+
+{\bf Is there any correlation between the pulse height and the gaussian width? }
+
+Timing resolution vs chi2 cut for gaussian fit is shown in Fig. \ref{fig:srcs01_000072_fig_3}.
+One can see that, compared to the ``constant fraction'' technique, 
+using the waveform parameterization and fitting the pulse leading edge allows to improve 
+the coincidence timing resolution by about 15\%.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_3}
+       \caption[]{Timing coincidence resolution : GAUS vs CFD}
+       \label{fig:srcs01_000072_fig_3}
+  \end{center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Exponential Fit}
+
+Depending on how well the parameterization reflects the physics underlying 
+the pulse development in time, different parameterizations may result in 
+different timing resolution. 
+
+The exponential parameterization is inspired by the consideration that the 
+early development of the avalanche should be exponential in time, 
+supported by the Fig. \ref{fig:run_72_ev_105_exp1_shape_display}, 
+showing exponential fit of the pulses for one of events. 
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/run_72_ev_105_exp1_shape_display}
+       \caption[]{fig 10}
+       \label{fig:run_72_ev_105_exp1_shape_display}
+  \end{center}
+\end{figure}
+
+The early, 0.02-0.25, part of the waveform is fit with the exponential 
+$$
+         A(t) = \alpha e^{ \beta(t-T_0) } ~{\rm for~} ~t > T_0 ~;~ A(t) = 0 ~~{\rm for~} ~ t < T_0
+$$
+
+and the fit parameter $T_0$ can be interpreted as the pulse start time.
+
+
+Distribuions  in the fitted parameters are shown in Fig. \ref{fig:srcs01_000072_fig_45}.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] % , clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_45}
+       \caption[]{
+         Exp1 fits: values of fitted parameters. Distributions in P0, P1, and P2 
+         for the two channels are overlayed
+       }
+       \label{fig:srcs01_000072_fig_45}
+  \end{center}
+\end{figure}
+
+
+Distribuions  in $\chi^2/N_{DOF}$ and the number of fit points are presented 
+in Fig. \ref{fig:srcs01_000072_fig_41}.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] % , clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_41}
+       \caption[]{
+         Exponential fits: distributions in $\chi^2/N_{DOF}$ and the number of fit points 
+       }
+       \label{fig:srcs01_000072_fig_41}
+  \end{center}
+\end{figure}
+
+
+Distribution in fractional part of T0 presented in in Fig.\ref{fig:srcs01_000072_fig_44} 
+doesn't show any statistically significant nonuniformities.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.1\textwidth] % , clip=true, viewport= 0.in .0in 8.in 7.in] 
+       {\plots/srcs01_000072/note/fig_44}
+       \caption[]{Figure 5: }
+       \label{fig:srcs01_000072_fig_44}
+  \end{center}
+\end{figure}
+
+Timing resolution vs chi2 cut for exponential fit is shown in Fig. \ref{fig:srcs01_000072_fig_43}.
+One can see that the waveform parameterization improves resolution by about 15\%.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] % , clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_43}
+       \caption[]{CTR resolution: EXP1 vs CFD}
+       \label{fig:srcs01_000072_fig_43}
+  \end{center}
+\end{figure}
+
+
+Finally, Fig. \ref{fig:srcs01_000072_fig_53} compares timing resolutions resulting 
+from two different fits - we find that they are close enough.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_53}
+       \caption[]{timing resolution: GAUS vs EXP1}
+       \label{fig:srcs01_000072_fig_53}
+  \end{center}
+\end{figure}
+
+Consistency of the results obtained using very different parameterizations indicates 
+waveform digitization allows to improve the timing resolution, the improvement we observe 
+is of the order of 15\%.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Fixed Shape Fit}
+
+Another option for fitting is to use a fixed pulse shape, where the pulse shape could 
+be derived directly from the data. For a given channel, an averaged pulse shape for 
+non-scattered photons is determined and , after being normalized to a maximum of 1, 
+is parameterized and used as a fit function. Advantage of this approach is that it uses 
+a 1-parameter fit, time offset of the fit function, and completely avoids dealing with 
+the analythical parameterization of the pulse shape.
+
+The main disadvantage of this approach is that it doesn't take into account statistical 
+fluctuations in the pulse development. If those are significant, they could affect the 
+timing resolution. Also, for different channels the pulse shapes may be different and 
+their time-dependence has to be studied.
+
+However, we test its resolution.
+
+Fig.\ref{fig:spln_shape_display_ev_0001} gives an example of the fit.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/spln_shape_display_ev_0001}
+       \caption[]{Waveform fit with the parameterized average pulse shapes}
+       \label{fig:spln_shape_display_ev_0001}
+  \end{center}
+\end{figure}
+
+The early, 0.02-0.25, part of the waveform is fit with the exponential .
+
+Figure \ref{fig:fig_71} shows distributions in the number of fit points and chi2 of the fit.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=0.9\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_71}
+       \caption[]{
+         Average pulses and distributions in the number of fit points and $\chi^2/NDOF$ 
+       }
+       \label{fig:fig_71}
+  \end{center}
+\end{figure}
+
+Figure \ref{fig:fig_72} shows distribution in  the coincidence time resolution for the 
+average waveform fit. Its $\sigma = 138$ ps, about 40\% worse than the best result 
+obtained with the gaussian parameterization of the leading edge. This difference 
+indicates that statistical variations of the pulse shape are important and ignoring 
+them significantly affects the timing reslution.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=1.0\textwidth] %, clip=true, viewport=0.in .0in 8.in 8.in] 
+       {\plots/srcs01_000072/note/fig_72}
+       \caption[]{
+         Distribution in $\Delta T_{01} = T_0 - T_1$, Coinsidence Timing Resolution CTR $\simeq$ 138 ps
+       }
+       \label{fig:fig_72}
+  \end{center}
+\end{figure}
+
+
+
+{\bf what is coming after that ?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section {Conclusions }
+
+\begin{itemize}
+\item
+  using the waveform digitization we measure the CTR below 240 ps FWHM
+\item 
+  compared to CFD-based determination of the pulse timing, fitting of the 
+  waveform leading edge and determining the pulse timing based on the 
+  fit results improves the timing resolution by about 15\%
+\item 
+  different parameterizations of the pulse leading edge result in close 
+  timing resolutions. So far, the best timing resolution achieved 
+  used gaussian parameterisation of the waveform leading edge described 
+  in Section \ref{sec:gaussian_fit}. We also note that, out of three 
+  different parameterizations tried, the gaussian fit gives the best 
+  average value of $\chi^2/NDOF$.
+\item 
+  given limited photostatistics, event-to-event fluctuations 
+  of the pulse leading edge shape are important, ignoring them and 
+  using the ``average pulse shape'' for the pulse timing determination 
+  degrades the timing resolution by as much as $\sim 40\%$.
+\end{itemize}
+
+
+%----------------------------------
+\include{note_002_bibliography}
+
+
+\section {Apppendix 1: Pedestal Subtraction }
+\label{sec:appendix_1}
+
+%
+First, the voltage offset is calculated as a mean over channels 50-150. 
+The offset is subtracted from the waveform. A channel \tzeroa\, corresponding 
+to the 20 mV pulse height, is found by backward scanning of the leading edge 
+and the approximate value of pulse time \tzeroa\ is determined in the linear 
+approximation as
+
+$$
+   T_0^a ~=~ T_{20} ~-~ {{V(T_{20})}\over dV/dT};  
+   ~~ {\rm where} ~~ dV/dT ~=~ {{(V(T_{20}+2) ~-~ V(T_{20}-2))} \over 4}
+$$
+
+After \tzeroa\ is determined, the pedestal is recalculated over the 10ns range 
+directly preceding the pulse, using channels from \tzeroa-60 to \tzeroa-10, and 
+subtracted  from the waveform.
+
+\begin{figure}[h!]
+  \begin{center}
+%    \vspace*{-2.8cm}
+    \includegraphics [width=.9\textwidth, clip=true, viewport=0.in .0in 8.in 6.in] 
+       {\plots/srcs01_000072/run_072_fig_003_ped_c2p}
+       \caption[]{
+         Fitted pedestals, in the top row, and standard deviations of the pedestal fit, 
+         in the bottom row. Compared to the typical noise of 0.4-0.5 mV, the pedestals 
+         are stable over the course of the run. \\
+         {\bf 1. look more closely at events where pedestals are 1 mV away from the mean} \\
+         {\bf 2. look at events with RMS around 2.5-3} \\
+         {\bf 3. c2p's in the histogram titles are, in fact, not $\chi^2$'s but $\sigma$'s}
+       }
+       \label{fig:run_072_fig_003_ped_c2p}
+  \end{center}
+\end{figure}
+
+As shown in Fig.~\ref{fig:run_072_fig_003_ped_c2p}, the mean pedestals are stable 
+within the run compared to the noise. Average noise,  determined as the waveform RMS 
+calculated over the pedestal area, is about 0.4-0.5 mV.
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% end of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,332 @@
+% $Header: /home/camac/cvs/drs/notes/2012-07-06-pet-compton.tex,v 1.1 2012/07/06 16:29:35 camac Exp $
+
+\documentclass{beamer}[10pt]
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+
+\mode<presentation> {
+  % \usetheme{Warsaw}
+  \usetheme{Boadilla}
+%  \usetheme{Darmstadt}
+%  \usetheme{Berkeley}
+  % or ...
+
+%  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+
+\usepackage[english]{babel}
+% or whatever
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage{graphics}
+\usepackage{subfigure}
+
+%  \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper,border shrink=2mm,landscape]
+
+% make beamer and subfigure work well
+\makeatletter
+\def\ext\@subfigure{lof}
+\makeatother
+
+% \usepackage{geometry}
+% \geometry{letterpaper,landscape}
+
+% \usepackage{caption}
+\usepackage[T1]{fontenc}
+
+
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+\title{
+  \underline \small {\bf Events with Compton scattering and the strip line -based readout }
+}
+
+%% \subtitle{ 
+%%   \vspace{0.5in}
+%% %  {\underline {$ZZ \to 4$ Leptons Channel}} , \\
+%%   {\small What one can do}
+%% }
+
+
+%% \institute{\inst{1}Fermilab }
+% \institute{\inst{1}Univ of Athens, \inst{2}Fermilab , \inst{3}Univ of Glasgow}
+
+\author{
+  \fontseries{s}
+  \fontsize{6}{8}
+  \selectfont
+%  {\bf P.Murat  \inst{2} }
+  S.One, S.Two, {\bf P.Murat}
+}
+
+\date{\today}
+%\date{Aug 18 2011}
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Experimental report}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%%% \pgfdeclareimage[height=0.5cm]{university-logo}{checks\_reorder.pdf}
+%%% \logo{\pgfuseimage{university-logo}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%%\AtBeginSubsection[] {
+%%%------------------------------------------------------------------------------
+%% \begin{frame}<beamer>{\underline{Outline}}
+%%    % \tableofcontents[currentsection,currentsubsection]
+%%  \tableofcontents[currentsection]
+%% \end{frame}
+%%}
+%%
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+% \beamerdefaultoverlayspecification{<+->}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand {\eemm}          {\mbox{$ee\mu\mu$}}
+\newcommand {\et}            {\mbox{$E_T$}}
+\newcommand {\etcorr}        {\mbox{$E_T^{corr}$}}
+\newcommand {\gevcsq}        {\mbox{$GeV\!/c^2$}}
+\newcommand {\gt}            {\mbox{$>$}}
+\newcommand {\invfb}         {\mbox{$fb^{-1}$}}
+\newcommand {\invfbrm}       {\mbox{$\rm fb^{-1}$}}
+\newcommand {\invpb}         {\mbox{$pb^{-1}$}}
+\newcommand {\invpbrm}       {\mbox{$\rm pb^{-1}$}}
+\newcommand {\jpsi}          {\mbox{$J/\psi$}}
+\newcommand {\lt}            {\mbox{$<$}}
+\newcommand {\met}           {\mbox{${\not\! E}_{T}$}}
+\newcommand {\mmmm}          {\mbox{$\mu\mu\mu\mu$}}
+\newcommand {\mzz}           {\mbox{$M_{ZZ}$}}
+\newcommand {\pb}            {\mbox{\rm\,pb}}
+\newcommand {\ppbar}         {\mbox{$p\bar{p}$}}
+\newcommand {\pt}            {\mbox{$p_T$}}
+\newcommand {\red}           {\color{red}}
+\newcommand {\stat}          {\mbox{\rm (stat.)}}
+\newcommand {\statsys}       {\mbox{\rm (stat.+syst.)}}
+\newcommand {\syst}          {\mbox{\rm (syst.)}}
+\newcommand {\wpigamma}      {\mbox{$W^{\pm} \rightarrow \pi^{\pm} \gamma$}}
+\newcommand {\wenu}          {\mbox{$W^{\pm} \rightarrow e^{\pm} \nu$}}
+\newcommand {\wlnu}          {\mbox{$W^{\pm} \rightarrow l^{\pm} \nu$}}
+\newcommand {\wmunu}         {\mbox{$W^{\pm} \rightarrow \mu^{\pm} \nu$}}
+\newcommand {\wtaunu}        {\mbox{$W^{\pm} \rightarrow \tau^{\pm} \nu$}}
+\newcommand {\zpsigamma}     {\mbox{$    Z^{0} \rightarrow J/\psi \gamma$}}
+\newcommand {\zpigamma}      {\mbox{$\rm Z^{0} \rightarrow \pi^{0} \gamma$}}
+\newcommand {\zee}           {\mbox{$\rm Z^0 \rightarrow e^+ e^-$}}
+\newcommand {\zmumu}         {\mbox{$\rm Z^0 \rightarrow \mu^+ \mu^-$}}
+\newcommand {\ztautau}       {\mbox{$\rm Z^0 \rightarrow \tau^+ \tau^-$}}
+\newcommand {\zll }          {\mbox{$Z       \rightarrow l^{+}l^{-}$}}
+\newcommand {\zupsgamma}     {\mbox{$    Z^0 \rightarrow \Upsilon \gamma$}}
+\newcommand {\zzx }          {\mbox{$X       \to ZZ$}}
+\newcommand {\zzllll}        {\mbox{$ZZ \to \ell^+ \ell^- \ell^+ \ell^-$}}
+\newcommand {\zzllnn}        {\mbox{$ZZ \to \ell^+ \ell^- \nu \nu$}}
+\newcommand {\zzlljj}        {\mbox{$ZZ \to \ell^+ \ell^- j j$}}
+
+\newcommand {\plots}  {/home/camac/figures/}   % PET01
+% \newcommand {\plots}  {/home/murat/figures/drs4}   % MURAT03
+
+
+\begin{document}
+
+%------------------------------------------------------------------------------
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \begin{frame}{\underline{Outline}}
+%   \tableofcontents
+%   % You might wish to add the option [pausesections]
+% \end{frame}
+% 
+%------------------------------------------------------------------------------
+% \AtBeginSection[] {
+% % ------------------------------------------------------------------------------
+%   \begin{frame}<beamer>{}
+% %     \tableofcontents[currentsection,currentsubsection]
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
+% 
+% Structuring a talk is a difficult task and the following structure
+% may not be suitable. Here are some rules that apply for this
+% solution: 
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% - A conference audience is likely to know very little of what you
+%   are going to talk about. So *simplify*!
+% - In a 20min talk, getting the main ideas across is hard
+%   enough. Leave out details, even if it means being less precise than
+%   you think necessary.
+% - If you omit details that are vital to the proof/implementation,
+%   just say so once. Everybody will be happy with that.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%\subsection{What do we know about decays of the W's and Z's}
+
+%------------------------------------------------------------------------------
+\begin{frame}{ \underline{\small MPPC 11064 gain uniformity} }
+
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+
+  \begin{columns}
+    \column{2.0in} {
+      \begin{figure}[htbf]
+  %  \vspace{-0.2in}
+        %  \hspace{-0.4in}
+        \includegraphics[width=0.9\textwidth]
+        %, height=0.4\textheight, clip=true, viewport=0.0in 0.in 8in 7.7in] 
+                        {\plots/Ortec_run95_q_000}
+                        \caption{
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+                          Gain uniformity
+                        }
+      \end{figure}
+    }
+    \column{3.0in}{
+      \begin{figure}[htbf]
+        %  \vspace{-0.2in}
+        %  \hspace{-0.4in}
+        \includegraphics[width=0.9\textwidth]
+        %, height=0.4\textheight, clip=true, viewport=0.0in 0.in 8in 7.7in] 
+                        {\plots/Ortec_run95_q_000}
+                        \caption{
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+                          after gain calibration: charge vs channel number
+                        }
+      \end{figure}
+    }
+  \end{columns}
+
+  \begin{itemize}
+  \item 
+    gain uniformity at the level of 5\% (Phillips 776DC amplifiers: 6\%)
+  \item 
+    energy resolution: 12\%
+  \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+\begin{frame}{ \underline{\small Recover events with Compton scattering} }
+
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+
+\begin{figure}[htbf]
+  %  \vspace{-0.2in}
+  %  \hspace{-0.4in}
+  \includegraphics[width=0.9\textwidth, height=0.7\textheight]
+  %, clip=true, viewport=0.0in 0.in 4in 2.8in] 
+                  {\plots/Ortec_run95_q_000}
+\end{figure}
+
+  \begin{itemize}
+    \vspace{-0.2in}
+  \item 
+    Compton scattering event - a simple event display
+  \item
+    add up energies in the two channels
+  \end{itemize}
+
+\end{frame}
+
+
+%------------------------------------------------------------------------------
+\begin{frame}{ \underline{\small Recover events with Compton scattering - Contd} }
+
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+
+ \begin{figure}[htbf]
+  %  \vspace{-0.2in}
+  %  \hspace{-0.4in}
+  \includegraphics[width=0.8\textwidth, height=0.7\textheight]
+  %, clip=true, viewport=0.0in 0.in 4in 2.8in] 
+                  {\plots/Ortec_run95_q_000}
+                  \caption{Compton scattering}
+\end{figure}
+
+  \begin{itemize}
+    \vspace{-0.2in}
+  \item 
+    total statistics in the photopeak increases by about 40\%
+  \item 
+    timing resolution to be investigated
+  \end{itemize}
+
+\end{frame}
+
+
+%------------------------------------------------------------------------------
+\begin{frame}{ \underline{\small Summary} }
+
+  \fontseries{s}
+  \fontsize{8}{10}
+  \selectfont
+
+  \begin{itemize}
+  \item 
+    excellent uniformity of Hamamatsu 11064 MPPCs
+  \item 
+    studies of the Compton scatterer recovery in progress
+  \end{itemize}
+
+\end{frame}
+
+\end{document}
